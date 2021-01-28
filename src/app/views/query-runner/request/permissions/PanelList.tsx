@@ -12,19 +12,11 @@ import { FormattedMessage } from 'react-intl';
 import { useSelector } from 'react-redux';
 
 import { SortOrder } from '../../../../../types/enums';
-import { IPermission } from '../../../../../types/permissions';
+import { IPanelList, IPermission } from '../../../../../types/permissions';
 import { dynamicSort } from '../../../../utils/dynamic-sort';
 import { generateGroupsFromList } from '../../../../utils/generate-groups';
 import { setConsentedStatus } from './util';
 
-interface IPanelList {
-  messages: any;
-  columns: any[];
-  classes: any;
-  selection: any;
-  renderItemColumn: any;
-  renderDetailsHeader: Function;
-}
 
 const PanelList = ({ messages,
   columns, classes, selection,
@@ -96,13 +88,7 @@ const PanelList = ({ messages,
         onRenderDetailsHeader={(props?: any, defaultRender?: any) => renderDetailsHeader(props, defaultRender)}
       />
       {permissions && permissions.length === 0 &&
-        <Label style={{
-          display: 'flex',
-          width: '100%',
-          minHeight: '200px',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}>
+        <Label className={classes.message}>
           <FormattedMessage id='permissions not found' />
         </Label>
       }

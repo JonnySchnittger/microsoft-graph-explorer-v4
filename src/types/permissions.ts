@@ -32,3 +32,20 @@ export interface IPermissionProps {
 export interface IPermissionState {
   permissions: IPermission[];
 }
+
+export interface IPanelList {
+  messages: any;
+  columns: any[];
+  classes: any;
+  selection: any;
+  renderItemColumn: any;
+  renderDetailsHeader: Function;
+}
+
+export interface ITabList {
+  columns: any[];
+  classes: any;
+  renderItemColumn: Function;
+  renderDetailsHeader: Function;
+  maxHeight: string;
+}

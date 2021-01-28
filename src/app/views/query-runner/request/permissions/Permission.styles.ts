@@ -41,6 +41,13 @@ export const permissionStyles = (theme: ITheme) => {
     checkIcon: {
       fontSize: theme.fonts.large,
       color: theme.palette.accent
+    },
+    message: {
+      display: 'flex',
+      width: '100%',
+      minHeight: '200px',
+      justifyContent: 'center',
+      alignItems: 'center'
     }
   };
 };

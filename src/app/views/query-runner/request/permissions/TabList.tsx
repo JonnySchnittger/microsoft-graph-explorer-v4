@@ -2,17 +2,9 @@ import { DetailsList, DetailsListLayoutMode, IColumn, Label, SelectionMode } fro
 import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useSelector } from 'react-redux';
-import { IPermission } from '../../../../../types/permissions';
 
+import { IPermission, ITabList } from '../../../../../types/permissions';
 import { setConsentedStatus } from './util';
-
-interface ITabList {
-  columns: any[];
-  classes: any;
-  renderItemColumn: Function;
-  renderDetailsHeader: Function;
-  maxHeight: string;
-}
 
 const TabList = ({ columns, classes, renderItemColumn, renderDetailsHeader, maxHeight }: ITabList) => {
   const { consentedScopes, scopes, authToken } = useSelector((state: any) => state);
@@ -22,6 +14,12 @@ const TabList = ({ columns, classes, renderItemColumn, renderDetailsHeader, maxH
   useEffect(() => {
     setConsentedStatus(tokenPresent, permissions, consentedScopes);
   }, [scopes.data, consentedScopes]);
+
+  const displayNoPermissionsFoundMessage = () => {
+    return (<Label className={classes.message}>
+      <FormattedMessage id='permissions not found' />
+    </Label>);
+  }
 
   if (!scopes.hasUrl) {
     return displayNoPermissionsFoundMessage();
@@ -52,14 +50,4 @@ const TabList = ({ columns, classes, renderItemColumn, renderDetailsHeader, maxH
 
 export default TabList;
 
-function displayNoPermissionsFoundMessage() {
-  return (<Label style={{
-    display: 'flex',
-    width: '100%',
-    minHeight: '200px',
-    justifyContent: 'center',
-    alignItems: 'center'
-  }}>
-    <FormattedMessage id='permissions not found' />
-  </Label>);
-}
+
